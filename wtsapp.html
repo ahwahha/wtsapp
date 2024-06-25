@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel='stylesheet' href='button.css'>
+    <script>
+        function checkNumber(element) {
+            if (isNaN(element.value) || element.value.includes('.') || element.value.includes('e') || element.value.includes('-')) {
+                element.value = "";
+            }
+        }
+        function openChat() {
+            window.open('https://api.whatsapp.com/send?phone=' + country.value.toString() + number.value.toString(), "_self");
+        }
+        function pressEnter(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                openChat();
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div style="text-align:center; margin: 50px 0px 5px 0px;">
+        Open WhatsApp chat with any mobile number:
+    </div>
+    <div
+        style="display:flex; flex-flow: row nowrap; justify-content: center; align-items: center; gap: 5px; text-align:center; margin: 10px 0px 5px 0px;">
+        +<input id="country" type="text" value="852" style="text-align:center; height:30px; width:50px;">
+        <input id="number" type="text" placeholder="########" style="text-align:center; height:30px; width:150px;">
+    </div>
+    <div style="text-align:center;">
+        <button id="go" class="button" style="width:150px;height:35px;font-size:120%;">go</button>
+    </div>
+    <script>
+        country = document.getElementById('country');
+        country.addEventListener('keyup', () => { checkNumber(country) });
+        country.addEventListener('keypress', pressEnter);
+        number = document.getElementById('number');
+        number.addEventListener('keyup', () => { checkNumber(number) });
+        number.addEventListener('keypress', pressEnter);
+        go = document.getElementById('go');
+        go.addEventListener('click', openChat);
+    </script>
+</body>
+
+</html>
